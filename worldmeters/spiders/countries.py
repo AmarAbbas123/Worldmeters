@@ -7,11 +7,13 @@ class CountriesSpider(scrapy.Spider):
 
     def parse(self, response):
         #using xpath method
-        title=response.xpath("//h1/text()").get()
-        countries = response.xpath("//td/a/text()").getall()
-
-        yield{
-            'title':title,
-            'countries':countries
-        }
+      #  title=response.xpath("//h1/text()").get()
+        countries = response.xpath("//td/a").getall()
+        for country in countries:
+            name = country.xpath(".//text()")
+            link = country.xpath(".//@href()")
+            yield{
+                'country_name':name,
+                'country_link':link
+            }
         
