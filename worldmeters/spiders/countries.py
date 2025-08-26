@@ -18,24 +18,27 @@ class CountriesSpider(scrapy.Spider):
             yield scrapy.Request(url, headers=self.custom_headers)
 
     def parse(self, response):
-        countries = response.xpath("//td/a")
+        countries = response.xpath("//table[contains(@class, 'datatable')]/tbody/tr")
         for country in countries:
-            name = country.xpath(".//text()").get()
-            link = country.xpath(".//@href").get()
+            rank = country.xpath("./td[1]/text()").get()
+            name = country.xpath("./td[2]/a/text()").get()
+            link = country.xpath("./td[2]/a/@href").get()
 
             yield response.follow(
                 url=link,
                 headers=self.custom_headers,
                 callback=self.parse_country,
-                meta={'country': name}
+                meta={'country': name, 'rank': rank}
             )
 
     def parse_country(self, response):
         country = response.meta['country']
+        rank = response.meta['rank']
         rows = response.xpath("(//table[contains(@class,'datatable')])[1]/tbody/tr")
 
         for row in rows:
             yield {
+                "rank":rank,
                 'country': country,
                 'year': row.xpath(".//td[1]/text()").get(),
                 'population': row.xpath(".//td[2]/text()").get(),
