@@ -22,8 +22,9 @@ class CountriesSpider(scrapy.Spider):
         for country in countries:
             name=country.xpath(".//text()").get()
             link=country.xpath(".//@href").get()
-            yield{
-                'title' : name,
-                'countries_link': link
-            }
+
+           # absolute_url = f"https://www.worldometers.info/{link}"
+           # absolute_url = response.urljoin(link)
+           # yield scrapy.Request(url=absolute_url)
+            yield response.follow(url=link)
         
