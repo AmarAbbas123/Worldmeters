@@ -18,11 +18,12 @@ class CountriesSpider(scrapy.Spider):
 
     def parse(self, response):
         #using xpath method
-        title=response.xpath("//h1/text()").get()
-        countries = response.xpath("//td/a/text()").getall()
-
-        yield{
-            'title':title,
-            'countries':countries
-        }
+        countries = response.xpath("//td/a")
+        for country in countries:
+            name=country.xpath(".//text()").get()
+            link=country.xpath(".//@href").get()
+            yield{
+                'title' : name,
+                'countries_link': link
+            }
         
