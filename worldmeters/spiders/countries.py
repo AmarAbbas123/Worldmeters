@@ -1,4 +1,5 @@
 import scrapy
+import logging
 
 class CountriesSpider(scrapy.Spider):
     name = 'countries'
@@ -26,5 +27,14 @@ class CountriesSpider(scrapy.Spider):
            # absolute_url = f"https://www.worldometers.info/{link}"
            # absolute_url = response.urljoin(link)
            # yield scrapy.Request(url=absolute_url)
-            yield response.follow(url=link)
+            yield response.follow(url=link, callback=self.parse_country)
         
+    def parse_country(self,response):
+        rows=response.xpath("(//table[@class='datatable w-full border border-zinc-200 datatable-table'])[1]/tbody/tr")
+        for row in rows:
+            year = row.xpath(".//td[1]/text()").get()
+            population = row.xpath(".//td[2]/text()").get()
+        yield {
+            'year' : year,
+            'population' : population
+        }   
