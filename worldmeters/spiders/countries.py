@@ -35,7 +35,7 @@ class CountriesSpider(scrapy.Spider):
     def parse_country(self, response):
         country = response.meta['country']
         rank = response.meta['rank']
-        rows = response.xpath("(//table[contains(@class,'datatable')])[2]/tbody/tr")
+        rows = response.xpath("(//table[contains(@class,'datatable')])[1]/tbody/tr")
 
         for row in rows:
             yield {
@@ -55,3 +55,51 @@ class CountriesSpider(scrapy.Spider):
                 "World_Population": row.xpath(".//td[12]/text()").get(),
                 "Global Rank": row.xpath(".//td[13]/text()").get()
             }
+
+            
+
+"""
+# Population Forecast
+
+def parse_country(self, response):
+        country = response.meta['country']
+        rank = response.meta['rank']
+        rows = response.xpath("(//table[contains(@class,'datatable')])[2]/tbody/tr")
+
+        for row in rows:
+            yield {
+                "rank":rank,
+                'country': country,
+                'year': row.xpath(".//td[1]/text()").get(),
+                'population': row.xpath(".//td[2]/text()").get(),
+                'Yearly_Change': row.xpath(".//td[3]/text()").get(),
+                "Migrants_(net)": row.xpath(".//td[4]/text()").get(),
+                "Median Age": row.xpath(".//td[5]/text()").get(),
+                "Fertility Rate": row.xpath(".//td[6]/text()").get(),
+                "Density (P/Km²)": row.xpath(".//td[7]/text()").get(),
+                "Urban_Pop %": row.xpath(".//td[8]/text()").get(),
+                "Urban Population": row.xpath(".//td[9]/text()").get(),
+                "Country's Share of World Pop": row.xpath(".//td[10]/text()").get(),
+                "World_Population": row.xpath(".//td[11]/text()").get(),
+                "Global Rank": row.xpath(".//td[12]/text()").get()
+            }
+
+            """
+"""
+# Main Cities by Population
+
+def parse_country(self, response):
+        country = response.meta['country']
+        rank = response.meta['rank']
+        rows = response.xpath("(//table[contains(@class,'datatable')])[3]/tbody/tr")
+
+        for row in rows:
+            yield {
+                "Index":rank,
+                'country': country,
+                'City': row.xpath(".//td[2]/text()").get(),
+                'population': row.xpath(".//td[3]/text()").get(),
+               
+            }
+
+"""

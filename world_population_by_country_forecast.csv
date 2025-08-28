@@ -1,4 +1,4 @@
-rank,country,year,population,Yearly_%_Change,Yearly_Change,Migrants_(net),Median Age,Fertility Rate,Density (P/Km²),Urban_Pop %,Urban Population,Country's Share of World Pop,World_Population,Global Rank
+Index,country,year,population,Yearly_%_Change,Yearly_Change,Migrants_(net),Median Age,Fertility Rate,Density (P/Km²),Urban_Pop %,Urban Population,Country's Share of World Pop,World_Population,Global Rank
 1,India,2030,"1,525,138,844",0.82%,"12,254,664"," −388,547 ",30.8,1.88,513,39.80%,"607,341,981",17.80%,"8,569,124,911",1
 1,India,2035,"1,578,694,796",0.69%,"10,711,190"," −370,451 ",32.7,1.84,531,42.80%,"675,456,367",17.77%,"8,885,210,181",1
 1,India,2040,"1,622,580,039",0.55%,"8,777,049"," −399,517 ",34.7,1.8,546,45.90%,"744,380,367",17.68%,"9,177,190,203",1
