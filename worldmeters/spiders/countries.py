@@ -31,10 +31,11 @@ class CountriesSpider(scrapy.Spider):
                 meta={'country': name, 'rank': rank}
             )
 
+  
     def parse_country(self, response):
         country = response.meta['country']
         rank = response.meta['rank']
-        rows = response.xpath("(//table[contains(@class,'datatable')])[1]/tbody/tr")
+        rows = response.xpath("(//table[contains(@class,'datatable')])[2]/tbody/tr")
 
         for row in rows:
             yield {
